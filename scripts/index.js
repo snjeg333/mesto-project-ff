@@ -2,7 +2,7 @@ const cardTemplate = document.querySelector("#card-template").content;
 
 const cardsContainer = document.querySelector(".places__list");
 
-function createCards(link, name, deleteCard) {
+function createCard(link, name, deleteCard) {
   const card = cardTemplate.querySelector(".card").cloneNode(true);
   const cardTitle = card.querySelector(".card__title");
   cardTitle.textContent = name;
@@ -18,7 +18,7 @@ function createCards(link, name, deleteCard) {
 
 function renderCards(cards) {
   for (const card of cards) {
-    const newCard = createCards(card.link, card.name, deleteCard);
+    const newCard = createCard(card.link, card.name, deleteCard);
     cardsContainer.append(newCard);
   }
 }
