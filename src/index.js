@@ -54,8 +54,8 @@ function openEditPopup() {
 }
 
 // Сохранение отредактированных данных профиля
-function submitEditProfile(evt) {
-  evt.preventDefault();
+function submitEditProfile(event) {
+  event.preventDefault();
   nameOutput.textContent = nameInput.value;
   professionOutput.textContent = professionInput.value;
   closePopup(popupProfile);
@@ -108,5 +108,6 @@ document.addEventListener("keydown", (event) => {
 document.addEventListener("keydown", (event) => {
   closePopupOnEscape(event, popupAddPlace);
 });
-// Рендеринг начальных карточек
+
+// отрисовка начальных карточек
 renderCards(initialCards);
