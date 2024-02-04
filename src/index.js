@@ -2,8 +2,12 @@
 import { initialCards } from "./components/cards.js";
 // импортируем стили css
 import "./pages/index.css";
-import {createCard} from "./components/card.js"
-import {openPopup, closePopup, closePopupOnEscape} from "./components/modal.js"
+import { createCard } from "./components/card.js";
+import {
+  openPopup,
+  closePopup,
+  closePopupOnEscape,
+} from "./components/modal.js";
 
 // Получаем элементы DOM
 const cardsContainer = document.querySelector(".places__list");
@@ -66,7 +70,9 @@ function addCard(event) {
     link: placeLink.value,
   };
   popupFormAddPlace.reset();
-  cardsContainer.prepend(createCard(newCard.link, newCard.name, deleteCard, openCard));
+  cardsContainer.prepend(
+    createCard(newCard.link, newCard.name, deleteCard, openCard)
+  );
 }
 
 // Увеличение карточки

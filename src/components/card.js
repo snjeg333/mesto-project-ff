@@ -16,9 +16,9 @@ export function createCard(link, name, deleteCard, openCard) {
 
   // Обработчик для увеличения карточки
   pictureCard.addEventListener("click", (event) => {
-      openCard(event);
+    openCard(event);
   });
-  
+
   // Обработчик для кнопки удаления карточки
   const deleteButton = card.querySelector(".card__delete-button");
   deleteButton.addEventListener("click", () => {
@@ -27,4 +27,3 @@ export function createCard(link, name, deleteCard, openCard) {
 
   return card;
 }
-
