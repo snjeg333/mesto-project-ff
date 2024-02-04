@@ -1,6 +1,7 @@
 const cardTemplate = document.querySelector("#card-template").content;
+
 // Создание карточки
-export function createCard(link, name, deleteCard, openCard) {
+export function createCard(link, name, deleteCard, openCard, likeCard) {
   const card = cardTemplate.querySelector(".card").cloneNode(true);
   const cardTitle = card.querySelector(".card__title");
   cardTitle.textContent = name;
@@ -8,10 +9,10 @@ export function createCard(link, name, deleteCard, openCard) {
   pictureCard.setAttribute("src", link);
   pictureCard.setAttribute("alt", name);
 
-  // Обработчик для кнопки лайка
-  const likeCard = card.querySelector(".card__like-button");
-  likeCard.addEventListener("click", () => {
-    likeCard.classList.toggle("card__like-button_is-active");
+  //   // Обработчик для кнопки лайка
+  const likeButton = card.querySelector(".card__like-button");
+  likeButton.addEventListener("click", function () {
+    likeCard(likeButton);
   });
 
   // Обработчик для увеличения карточки
@@ -26,4 +27,14 @@ export function createCard(link, name, deleteCard, openCard) {
   });
 
   return card;
+}
+
+// Удаление карточки
+export function deleteCard(card) {
+  card.remove();
+}
+
+// Функция для лайка карточки
+export function likeCard(button) {
+  button.classList.toggle("card__like-button_is-active");
 }

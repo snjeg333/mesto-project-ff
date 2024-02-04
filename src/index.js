@@ -2,12 +2,8 @@
 import { initialCards } from "./components/cards.js";
 // импортируем стили css
 import "./pages/index.css";
-import { createCard } from "./components/card.js";
-import {
-  openPopup,
-  closePopup,
-  closePopupOnEscape,
-} from "./components/modal.js";
+import { createCard, deleteCard, likeCard } from "./components/card.js";
+import { openPopup, closePopup } from "./components/modal.js";
 
 // Получаем элементы DOM
 const cardsContainer = document.querySelector(".places__list");
@@ -36,14 +32,15 @@ const placeLink = popupAddPlace.querySelector(".popup__input_type_url");
 // Функция для отрисовки карточек
 function renderCards(cards) {
   for (const card of cards) {
-    const newCard = createCard(card.link, card.name, deleteCard, openCard);
+    const newCard = createCard(
+      card.link,
+      card.name,
+      deleteCard,
+      openCard,
+      likeCard
+    );
     cardsContainer.append(newCard);
   }
-}
-
-// Удаление карточки
-function deleteCard(card) {
-  card.remove();
 }
 
 // Открытие попапа редактирования профиля
@@ -71,7 +68,7 @@ function addCard(event) {
   };
   popupFormAddPlace.reset();
   cardsContainer.prepend(
-    createCard(newCard.link, newCard.name, deleteCard, openCard)
+    createCard(newCard.link, newCard.name, deleteCard, openCard, likeCard)
   );
 }
 
@@ -98,15 +95,6 @@ popupImageCloseButton.addEventListener("click", () => {
 });
 popupAddCardCloseButton.addEventListener("click", () => {
   closePopup(popupAddPlace);
-});
-document.addEventListener("keydown", (event) => {
-  closePopupOnEscape(event, popupImage);
-});
-document.addEventListener("keydown", (event) => {
-  closePopupOnEscape(event, popupProfile);
-});
-document.addEventListener("keydown", (event) => {
-  closePopupOnEscape(event, popupAddPlace);
 });
 
 // отрисовка начальных карточек
