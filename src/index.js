@@ -20,14 +20,12 @@ const professionInput = popupProfile.querySelector(
 const professionOutput = document.querySelector(".profile__description");
 const popupFormProfile = popupProfile.querySelector(".popup__form");
 const popupFormAddPlace = popupAddPlace.querySelector(".popup__form");
-const popupImageClose = document.querySelector(".popup__content_content_image");
-const popupImageCloseButton = popupImageClose.querySelector(".popup__close");
 const popupImage = document.querySelector(".popup_type_image");
 const zoomImage = popupImage.querySelector(".popup__image");
 const zoomImageTitle = popupImage.querySelector(".popup__caption");
-const popupAddCardCloseButton = popupAddPlace.querySelector(".popup__close");
 const placeName = popupAddPlace.querySelector(".popup__input_type_card-name");
 const placeLink = popupAddPlace.querySelector(".popup__input_type_url");
+const closeButtons = document.querySelectorAll(".popup__close");
 
 // Функция для отрисовки карточек
 function renderCards(cards) {
@@ -80,6 +78,11 @@ function openCard(click) {
   zoomImageTitle.innerText = click.target.alt;
 }
 
+closeButtons.forEach((button) => {
+  const popup = button.closest(".popup");
+  button.addEventListener("click", () => closePopup(popup));
+});
+
 // Обработчики событий
 cardAddButton.addEventListener("click", () => {
   openPopup(popupAddPlace);
@@ -90,12 +93,6 @@ popupProfileCloseButton.addEventListener("click", () => {
 profileEditButton.addEventListener("click", openEditPopup);
 popupFormProfile.addEventListener("submit", submitEditProfile);
 popupFormAddPlace.addEventListener("submit", addCard);
-popupImageCloseButton.addEventListener("click", () => {
-  closePopup(popupImage);
-});
-popupAddCardCloseButton.addEventListener("click", () => {
-  closePopup(popupAddPlace);
-});
 
 // отрисовка начальных карточек
 renderCards(initialCards);

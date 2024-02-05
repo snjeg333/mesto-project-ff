@@ -2,21 +2,22 @@
 export function openPopup(popup) {
   popup.classList.add("popup_is-opened");
   document.addEventListener("keydown", handleEscape);
+  document.addEventListener("mousedown", handleOverlay);
 }
 
 // Закрытие попапа
 export function closePopup(popup) {
   popup.classList.remove("popup_is-opened");
   document.removeEventListener("keydown", handleEscape);
+  document.removeEventListener("mousedown", handleOverlay);
 }
 
 // закрытие попапов по клику вне попапа мышью
-const popupContainer = document.querySelector(".page__content");
-popupContainer.addEventListener("click", (event) => {
+function handleOverlay(event) {
   if (event.target.classList.contains("popup")) {
     closePopup(event.target);
   }
-});
+}
 
 // закрытия при нажатии на клавишу "Escape"
 function handleEscape(evt) {
