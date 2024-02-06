@@ -49,16 +49,16 @@ function openEditPopup() {
 }
 
 // Сохранение отредактированных данных профиля
-function submitEditProfile(event) {
-  event.preventDefault();
+function submitEditProfile(evt) {
+  evt.preventDefault();
   nameOutput.textContent = nameInput.value;
   professionOutput.textContent = professionInput.value;
   closePopup(popupProfile);
 }
 
 // Добавление новой карточки
-function addCard(event) {
-  event.preventDefault();
+function addCard(evt) {
+  evt.preventDefault();
   closePopup(popupAddPlace);
   const newCard = {
     name: placeName.value,
@@ -87,9 +87,7 @@ closeButtons.forEach((button) => {
 cardAddButton.addEventListener("click", () => {
   openPopup(popupAddPlace);
 });
-popupProfileCloseButton.addEventListener("click", () => {
-  closePopup(popupProfile);
-});
+
 profileEditButton.addEventListener("click", openEditPopup);
 popupFormProfile.addEventListener("submit", submitEditProfile);
 popupFormAddPlace.addEventListener("submit", addCard);

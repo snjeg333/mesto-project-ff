@@ -13,9 +13,9 @@ export function closePopup(popup) {
 }
 
 // закрытие попапов по клику вне попапа мышью
-function handleOverlay(event) {
-  if (event.target.classList.contains("popup")) {
-    closePopup(event.target);
+function handleOverlay(evt) {
+  if (evt.target.classList.contains("popup")) {
+    closePopup(evt.target);
   }
 }
 

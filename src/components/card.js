@@ -16,8 +16,8 @@ export function createCard(link, name, deleteCard, openCard, likeCard) {
   });
 
   // Обработчик для увеличения карточки
-  pictureCard.addEventListener("click", (event) => {
-    openCard(event);
+  pictureCard.addEventListener("click", (evt) => {
+    openCard(evt);
   });
 
   // Обработчик для кнопки удаления карточки
