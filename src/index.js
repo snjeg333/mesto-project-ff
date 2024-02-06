@@ -10,7 +10,6 @@ const cardsContainer = document.querySelector(".places__list");
 const cardAddButton = document.querySelector(".profile__add-button");
 const popupAddPlace = document.querySelector(".popup_type_new-card");
 const popupProfile = document.querySelector(".popup_type_edit");
-const popupProfileCloseButton = popupProfile.querySelector(".popup__close");
 const profileEditButton = document.querySelector(".profile__edit-button");
 const nameInput = popupProfile.querySelector(".popup__input_type_name");
 const nameOutput = document.querySelector(".profile__title");
