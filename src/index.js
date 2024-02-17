@@ -93,3 +93,48 @@ popupFormAddPlace.addEventListener("submit", addCard);
 
 // отрисовка начальных карточек
 renderCards(initialCards);
+
+
+
+const showInputError = (popupElement, popupInput, errorMessage) => {
+  const errorElement = popupElement.querySelector(`.${popupInput.id}-error`);
+  popupInput.classList.add('popup__input_type_error');
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('popup__input-error_active');
+};
+
+const hideInputError = (popupElement, popupInput) => {
+  const errorElement = popupElement.querySelector(`.${popupInput.id}-error`);
+  popupInput.classList.remove('popup__input_type_error');
+  errorElement.classList.remove('popup__input-error_active');
+  errorElement.textContent = '';
+};
+
+const checkInputValidity = (popupElement, popupInput) => {
+  if (!popupInput.validity.valid) {
+    showInputError(popupElement, popupInput, popupInput.validationMessage);
+  } else {
+    hideInputError(popupElement, popupInput);
+  }
+};
+
+const setEventListeners = (popupElement) => {
+  const inputList = Array.from(popupElement.querySelectorAll('.popup__input'));
+  inputList.forEach((popupInput) => {
+    popupInput.addEventListener('input', function () {
+      checkInputValidity(popupElement, popupInput);
+    });
+  });
+};
+
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll('.popup__form'));
+  formList.forEach((popupElement) => {
+  popupElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+  });
+
+    setEventListeners(popupElement);
+});
+};
+enableValidation()
