@@ -9,7 +9,7 @@ export function createCard(link, name, deleteCard, openCard, likeCard) {
   pictureCard.setAttribute("src", link);
   pictureCard.setAttribute("alt", name);
 
-  //   // Обработчик для кнопки лайка
+  // Обработчик для кнопки лайка
   const likeButton = card.querySelector(".card__like-button");
   likeButton.addEventListener("click", function () {
     likeCard(likeButton);

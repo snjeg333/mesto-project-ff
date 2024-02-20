@@ -3,6 +3,13 @@ export function openPopup(popup) {
   popup.classList.add("popup_is-opened");
   document.addEventListener("keydown", handleEscape);
   document.addEventListener("mousedown", handleOverlay);
+  
+  
+  const inputs = popup.querySelectorAll(".popup__input");
+  inputs.forEach((input) => {
+    input.value = "";
+  });
+
 }
 
 // Закрытие попапа
@@ -10,6 +17,7 @@ export function closePopup(popup) {
   popup.classList.remove("popup_is-opened");
   document.removeEventListener("keydown", handleEscape);
   document.removeEventListener("mousedown", handleOverlay);
+  
 }
 
 // закрытие попапов по клику вне попапа мышью
