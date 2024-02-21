@@ -3,7 +3,7 @@ import { initialCards } from "./components/cards.js";
 // импортируем стили css
 import "./pages/index.css";
 import { createCard, deleteCard, likeCard } from "./components/card.js";
-import { openPopup, closePopup } from "./components/modal.js";
+import { openPopup, closePopup, clearInputValues } from "./components/modal.js";
 import {
   enableValidation,
   clearValidationErrors
@@ -50,10 +50,15 @@ function renderCards(cards) {
 
 // Открытие попапа редактирования профиля
 function openEditPopup() {
+  fillContent()
+  clearValidationErrors(formEdit);
   openPopup(popupProfile);
+}
+
+// Функция для заполнения контента в попапе
+function fillContent() {
   nameInput.value = nameOutput.textContent;
   professionInput.value = professionOutput.textContent;
-  clearValidationErrors(formEdit);
 }
 
 // Сохранение отредактированных данных профиля
@@ -86,15 +91,16 @@ function openCard(click) {
   zoomImageTitle.innerText = click.target.alt;
 }
 
+// Обработчики событий
 closeButtons.forEach((button) => {
   const popup = button.closest(".popup");
   button.addEventListener("click", () => closePopup(popup));
 });
 
-// Обработчики событий
 cardAddButton.addEventListener("click", () => {
-  openPopup(popupAddPlace);
+  clearInputValues();
   clearValidationErrors(formNewCard);
+  openPopup(popupAddPlace);
 });
 
 profileEditButton.addEventListener("click", openEditPopup);
@@ -104,5 +110,6 @@ popupFormAddPlace.addEventListener("submit", addCard);
 // отрисовка начальных карточек
 renderCards(initialCards);
 
+// вызов волидации 
 enableValidation();
 
