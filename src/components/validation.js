@@ -43,6 +43,7 @@ const checkInputValidity = (popupElement, popupInput) => {
 // Функция для установки обработчиков событий на поля ввода
 const setEventListeners = (popupElement) => {
   const inputList = Array.from(popupElement.querySelectorAll(".popup__input"));
+
   const buttonElement = popupElement.querySelector(".popup__button");
   toggleButtonState(inputList, buttonElement);
   inputList.forEach((popupInput) => {
@@ -60,11 +61,8 @@ export const enableValidation = () => {
     popupElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
     });
-    // const fieldsetList = Array.from(document.forms);
-    // fieldsetList.forEach((fieldset) => {
-    //   setEventListeners(fieldset);
-    // });
-      setEventListeners(popupElement);
+
+    setEventListeners(popupElement);
   });
 };
 
@@ -88,16 +86,15 @@ const toggleButtonState = (inputList, buttonElement) => {
   }
 };
 
-// Очистка ошибок валидации
-export const clearValidationErrors = () => {
-  const inputList = Array.from(document.querySelectorAll(".popup__input"));
-  inputList.forEach((popupInput) => {
-    hideInputError(popupInput.closest(".popup__form"), popupInput);
-  });
+
+// Функция для очистки ошибок валидации и сброса состояния кнопки
+export const clearValidationErrors = (form) => {
+    const inputList = Array.from(form.querySelectorAll(".popup__input")); 
+    const buttonElement = form.querySelector(".popup__button"); 
+    inputList.forEach((popupInput) => {
+        hideInputError(form, popupInput); 
+        popupInput.setCustomValidity(""); 
+    });
+
+    toggleButtonState(inputList, buttonElement); 
 };
-
-
-
-
-
-

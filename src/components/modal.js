@@ -3,8 +3,7 @@ export function openPopup(popup) {
   popup.classList.add("popup_is-opened");
   document.addEventListener("keydown", handleEscape);
   document.addEventListener("mousedown", handleOverlay);
-  
-  
+ 
   const inputs = popup.querySelectorAll(".popup__input");
   inputs.forEach((input) => {
     input.value = "";
