@@ -72,11 +72,6 @@ function handleAvatar(evt) {
     .finally(() => renderLoading(false, button));
 }
 
-// // Смена кнопки загрузки
-// function renderLoading(isLoading, button) {
-//   button.textContent = isLoading ? "Сохранение..." : "Сохранить";
-// }
-
 // Открытие попапа редактирования профиля
 function openEditPopup() {
   fillContent();
