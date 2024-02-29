@@ -1,0 +1,19 @@
+/* стили кнопки редактирования аватара  */
+.profile__avatar-edit-botton {
+    background-color: rgba(0, 0, 0, 0.8);
+    background-image: url("/src/images/avatar_pan.svg");
+    background-position: 50%;
+    background-repeat: no-repeat;
+    height: 100%;
+    opacity: 0;
+    transition: .3s;
+    width: 100%;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .profile__avatar-edit-botton:hover {
+    opacity: 1;
+  }
+  

@@ -1,27 +1,27 @@
 /* модуль содержащий скрипты валидации форм */
 
-// const selectors = {
-//     formSelector: ".popup__form",
-//     inputSelector: ".popup__input",
-//     submitButtonSelector: ".popup__button",
-//     inactiveButtonClass: "popup__submit_disabled",
-//     inputErrorClass: "popup__input_type_error",
-//     errorClass: "popup__input-error_active",
-//   };
+export const selectors = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__submit_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__input-error_active",
+};
 
 // Функция для показа ошибки ввода
 const showInputError = (popupElement, popupInput, errorMessage) => {
   const errorElement = popupElement.querySelector(`.${popupInput.id}-error`);
-  popupInput.classList.add("popup__input_type_error");
+  popupInput.classList.add(selectors.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add("popup__input-error_active");
+  errorElement.classList.add(selectors.errorClass);
 };
 
 // Функция для скрытия ошибки ввода
 const hideInputError = (popupElement, popupInput) => {
   const errorElement = popupElement.querySelector(`.${popupInput.id}-error`);
-  popupInput.classList.remove("popup__input_type_error");
-  errorElement.classList.remove("popup__input-error_active");
+  popupInput.classList.remove(selectors.inputErrorClass);
+  errorElement.classList.remove(selectors.errorClass);
   errorElement.textContent = "";
 };
 
@@ -42,9 +42,13 @@ const checkInputValidity = (popupElement, popupInput) => {
 
 // Функция для установки обработчиков событий на поля ввода
 const setEventListeners = (popupElement) => {
-  const inputList = Array.from(popupElement.querySelectorAll(".popup__input"));
+  const inputList = Array.from(
+    popupElement.querySelectorAll(selectors.inputSelector)
+  );
 
-  const buttonElement = popupElement.querySelector(".popup__button");
+  const buttonElement = popupElement.querySelector(
+    selectors.submitButtonSelector
+  );
   toggleButtonState(inputList, buttonElement);
   inputList.forEach((popupInput) => {
     popupInput.addEventListener("input", function () {
@@ -56,13 +60,11 @@ const setEventListeners = (popupElement) => {
 
 // Функция для включения валидации полей формы
 export const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll(".popup__form"));
-  formList.forEach((popupElement) => {
-    popupElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
-
-    setEventListeners(popupElement);
+  const formList = Array.from(
+    document.querySelectorAll(selectors.formSelector)
+  );
+  formList.forEach((form) => {
+    setEventListeners(form);
   });
 };
 
@@ -78,23 +80,22 @@ const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
     buttonElement.disabled = true;
-    buttonElement.classList.add("popup__submit_disabled");
+    buttonElement.classList.add(selectors.inactiveButtonClass);
   } else {
     // иначе сделай кнопку активной
     buttonElement.disabled = false;
-    buttonElement.classList.remove("popup__submit_disabled");
+    buttonElement.classList.remove(selectors.inactiveButtonClass);
   }
 };
 
-
 // Функция для очистки ошибок валидации и сброса состояния кнопки
 export const clearValidationErrors = (form) => {
-    const inputList = Array.from(form.querySelectorAll(".popup__input")); 
-    const buttonElement = form.querySelector(".popup__button"); 
-    inputList.forEach((popupInput) => {
-        hideInputError(form, popupInput); 
-        popupInput.setCustomValidity(""); 
-    });
+  const inputList = Array.from(form.querySelectorAll(selectors.inputSelector));
+  const buttonElement = form.querySelector(selectors.submitButtonSelector);
+  inputList.forEach((popupInput) => {
+    hideInputError(form, popupInput);
+    popupInput.setCustomValidity("");
+  });
 
-    toggleButtonState(inputList, buttonElement); 
+  toggleButtonState(inputList, buttonElement);
 };
