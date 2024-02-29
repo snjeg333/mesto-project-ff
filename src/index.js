@@ -22,6 +22,8 @@ import {
   deleteCard,
 } from "./components/api.js";
 
+import { renderLoading } from "./components/utils.js"
+
 // Получаем элементы DOM
 const cardsContainer = document.querySelector(".places__list");
 const cardAddButton = document.querySelector(".profile__add-button");
@@ -57,28 +59,28 @@ let userId;
 function handleAvatar(evt) {
   evt.preventDefault();
   const button = avatarPopup.querySelector(".popup__button");
-  Loading(true, button);
+  renderLoading(true, button);
   const popupLink = formAvatar.elements.link;
   editAvatar(popupLink.value)
     .then((res) => {
       profileAvatarButton.style.backgroundImage = `url(\'${res.avatar}\')`;
+      closePopup(avatarPopup);
     })
     .catch((err) => {
       console.log(err);
     })
-    .finally(() => Loading(false, button));
-  closePopup(avatarPopup);
+    .finally(() => renderLoading(false, button));
 }
 
-// Смена кнопки загрузки
-function Loading(Loading, button) {
-  button.textContent = Loading ? "Сохранение..." : "Сохранить";
-}
+// // Смена кнопки загрузки
+// function renderLoading(isLoading, button) {
+//   button.textContent = isLoading ? "Сохранение..." : "Сохранить";
+// }
 
 // Открытие попапа редактирования профиля
 function openEditPopup() {
   fillContent();
-  clearValidationErrors(formEdit);
+  clearValidationErrors(formEdit, selectors);
   openPopup(popupProfile);
 }
 
@@ -92,7 +94,7 @@ function fillContent() {
 function submitEditProfile(evt) {
   evt.preventDefault();
   const button = popupProfile.querySelector(".popup__button");
-  Loading(true, button);
+  renderLoading(true, button);
   updateUserData(nameInput.value, professionInput.value)
     .then((res) => {
       nameOutput.textContent = res.name;
@@ -101,7 +103,7 @@ function submitEditProfile(evt) {
     .catch((err) => {
       console.log(err);
     })
-    .finally(() => Loading(false, button));
+    .finally(() => renderLoading(false, button));
   closePopup(popupProfile);
 }
 
@@ -109,7 +111,7 @@ function submitEditProfile(evt) {
 function addCard(evt) {
   evt.preventDefault();
   const button = popupAddPlace.querySelector(".popup__button");
-  Loading(true, button);
+  renderLoading(true, button);
   const newCard = {
     name: placeName.value,
     link: placeLink.value,
@@ -133,7 +135,7 @@ function addCard(evt) {
     .catch((err) => {
       console.log(err);
     })
-    .finally(() => Loading(false, button));
+    .finally(() => renderLoading(false, button));
   closePopup(popupAddPlace);
 }
 
@@ -153,13 +155,13 @@ closeButtons.forEach((button) => {
 
 profileAvatarButton.addEventListener("click", function () {
   clearInputValues();
-  clearValidationErrors(formAvatar);
+  clearValidationErrors(formAvatar, selectors);
   openPopup(avatarPopup);
 });
 
 cardAddButton.addEventListener("click", () => {
   clearInputValues();
-  clearValidationErrors(formNewCard);
+  clearValidationErrors(formNewCard, selectors);
   openPopup(popupAddPlace);
 });
 
