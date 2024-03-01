@@ -22,7 +22,7 @@ import {
   deleteCard,
 } from "./components/api.js";
 
-import { renderLoading } from "./components/utils.js"
+import { renderLoading } from "./components/utils.js";
 
 // Получаем элементы DOM
 const cardsContainer = document.querySelector(".places__list");
@@ -99,12 +99,12 @@ function submitEditProfile(evt) {
     .then((res) => {
       nameOutput.textContent = res.name;
       professionOutput.textContent = res.about;
+      closePopup(popupProfile);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => renderLoading(false, button));
-  closePopup(popupProfile);
 }
 
 // Добавление новой карточки
@@ -131,12 +131,12 @@ function addCard(evt) {
           newCard
         )
       );
+      closePopup(popupAddPlace);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => renderLoading(false, button));
-  closePopup(popupAddPlace);
 }
 
 // Увеличение карточки
